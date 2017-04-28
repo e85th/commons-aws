@@ -1,10 +1,10 @@
-(defproject e85th/commons-aws "0.1.1"
+(defproject e85th/commons-aws "0.1.2"
   :description "AWS implementation of protocols in commons"
   :url "http://github.com/e85th/commons-aws"
   :license {:name "Apache License 2.0"
             :url "http://www.apache.org/licenses/LICENSE-2.0"}
   :dependencies [[org.clojure/clojure "1.9.0-alpha15" :scope "provided"]
-                 [e85th/commons "0.1.12"]
+                 [e85th/commons "0.1.13"]
                  ;; -- AWS
                  [amazonica "0.3.66" :scope "provided"]]
 
