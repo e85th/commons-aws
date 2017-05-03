@@ -10,4 +10,8 @@
 
   :source-paths ["src"]
   :deploy-repositories [["releases" :clojars]
-                        ["snapshots" :clojars]])
+                        ["snapshots" :clojars]]
+
+
+  ;; only to quell lein-cljsbuild when using checkouts
+  :cljsbuild {:builds []})
