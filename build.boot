@@ -1,9 +1,9 @@
 (set-env!
  :source-paths #{"test"}
  :resource-paths #{"src"}
- :dependencies '[[org.clojure/clojure "1.9.0-alpha15" :scope "provided"]
-                 [e85th/commons "0.1.23"]
-                 [amazonica "0.3.104" :scope "provided"]
+ :dependencies '[[org.clojure/clojure "1.9.0-alpha17" :scope "provided"]
+                 [e85th/commons "0.1.24"]
+                 [amazonica "0.3.105" :scope "provided"]
                  [adzerk/boot-test "1.2.0" :scope "test"]]
 
  :repositories #(conj %
@@ -45,7 +45,7 @@
 
 (task-options!
  pom {:project 'e85th/commons-aws
-      :version "0.1.3"
+      :version "0.1.4"
       :description "AWS implementation of protocols in commons"
       :url "http://github.com/e85th/commons-aws"
       :scm {:url "http://github.com/e85th/commons-aws"}
