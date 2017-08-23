@@ -5,8 +5,8 @@
             [e85th.commons.aws.models :as m]
             [taoensso.timbre :as log]
             [me.raynes.fs :as fs]
-            [clojure.string :as str]
-            [clojure.string :as string])
+            [clj-time.core :as time]
+            [clojure.string :as str])
   (:import [com.amazonaws.services.s3.model DeleteObjectsRequest$KeyVersion]))
 
 (s/defn s3-url?
@@ -70,4 +70,14 @@
      (s3/does-object-exist bucket path))))
 
 
-;(ls "")
+(s/defn presigned-upload-url :- s/Str
+  "Creates a presigned upload url to directly save to s3 using HTTP PUT.
+   creds is a map with {:profile ...} or {:access-key .. :secret-key .. :endpoint ..}"
+  [creds bucket-name :- s/Str key :- s/Str content-type :- s/Str expiration-seconds :- s/Int]
+  (assert (not (str/starts-with? key "/")) "the key must not begin with a '/'")
+  (str (s3/generate-presigned-url creds
+                                  :bucket-name bucket-name
+                                  :key key
+                                  :method com.amazonaws.HttpMethod/PUT
+                                  :content-type content-type
+                                  :expiration (-> expiration-seconds time/seconds time/from-now))))
