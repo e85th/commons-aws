@@ -9,8 +9,8 @@
                  [amazonica "0.3.111" :scope "provided"]]
 
   :source-paths ["src"]
-  :deploy-repositories [["releases" :clojars]
-                        ["snapshots" :clojars]]
+  :deploy-repositories [["releases"  {:sign-releases false :url "https://clojars.org/repo"}]
+                        ["snapshots" {:sign-releases false :url "https://clojars.org/repo"}]]
 
 
   ;; only to quell lein-cljsbuild when using checkouts
