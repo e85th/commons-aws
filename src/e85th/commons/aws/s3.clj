@@ -2,7 +2,6 @@
   (:require [clojure.spec.alpha :as s]
             [amazonica.aws.s3 :as s3]
             [amazonica.aws.s3transfer :as s3transfer]
-            [e85th.commons.aws.models :as m]
             [e85th.commons.aws.domain :as domain]
             [taoensso.timbre :as log]
             [me.raynes.fs :as fs]

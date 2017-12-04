@@ -3,7 +3,6 @@
             [clojure.spec.alpha :as s]
             [e85th.commons.aws.domain :as domain]
             [e85th.commons.aws.sns :as sns]
-            [e85th.commons.aws.models :as m]
             [e85th.commons.util :as u]
             [clojure.string :as str]
             [cheshire.core :as json]))

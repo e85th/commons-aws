@@ -1,4 +1,4 @@
-(defproject e85th/commons-aws "0.1.6-alpha1"
+(defproject e85th/commons-aws "0.1.6-alpha2"
   :description "AWS implementation of protocols in commons"
   :url "http://github.com/e85th/commons-aws"
   :license {:name "Apache License 2.0"

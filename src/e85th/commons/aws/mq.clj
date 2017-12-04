@@ -4,7 +4,6 @@
             [e85th.commons.aws.domain :as domain]
             [e85th.commons.aws.sqs :as sqs]
             [e85th.commons.aws.sns :as sns]
-            [e85th.commons.aws.models :as m]
             [com.stuartsierra.component :as component]
             [clojure.spec.alpha :as s]
             [taoensso.timbre :as log]
