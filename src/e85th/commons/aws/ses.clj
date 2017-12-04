@@ -2,28 +2,39 @@
   (:require [amazonica.aws.simpleemail :as ses]
             [e85th.commons.email :as email]
             [com.stuartsierra.component :as component]
-            [schema.core :as s]
+            [clojure.spec.alpha :as s]
             [taoensso.timbre :as log])
   (:import [com.amazonaws.services.simpleemail.model MessageRejectedException]
            [clojure.lang IFn]))
 
-(s/defn ^:private message->destination
+;;----------------------------------------------------------------------
+(s/fdef message->destination
+        :args (s/cat :msg ::email/message))
+
+(defn- message->destination
   "Create a destination map of addresses."
-  [{:keys [to cc bcc]} :- email/Message]
+  [{:keys [to cc bcc] :as msg}]
   (cond-> {:to-addresses to}
     (seq cc) (assoc :cc-addresses cc)
     (seq bcc) (assoc :bcc-addresses bcc)))
 
-(s/defn ^:private message->body
+;;----------------------------------------------------------------------
+(s/fdef message->body
+        :args (s/cat :msg ::email/message))
+
+(defn- message->body
   "Generates the body map."
-  [{:keys [body content-type]} :- email/Message]
+  [{:keys [body content-type] :as msg}]
   (condp = content-type
     email/html-content-type {:html body}
     {:text body}))
 
-(s/defn ^:private send-message
+;;----------------------------------------------------------------------
+(s/fdef send-message
+        :args (s/cat :subject-modifier-fn fn? :msg ::email/message))
+(defn- send-message
   "Sends a message using ses."
-  [subject-modifier-fn :- IFn {:keys [from subject body content-type] :as msg} :- email/Message]
+  [subject-modifier-fn {:keys [from subject body content-type] :as msg}]
   (ses/send-email :destination (message->destination msg)
                   :source from
                   :message {:subject (subject-modifier-fn subject)
@@ -40,9 +51,9 @@
          (merge {:content-type email/default-content-type})
          (send-message subject-modifier-fn))))
 
-(s/defn new-ses-email-sender
+(defn new-ses-email-sender
   "Creates a new SES email sender."
   ([]
    (new-ses-email-sender identity))
-  ([subject-modifier-fn :- IFn]
+  ([subject-modifier-fn]
    (map->SesEmailSender {:subject-modifier-fn subject-modifier-fn})))
