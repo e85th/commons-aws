@@ -1,0 +1,14 @@
+{:paths ["src"]
+ :deps
+ {org.clojure/clojure                          {:mvn/version "1.9.0" :scope "provided"}
+  e85th/commons {:git/url "https://github.com/e85th/commons"
+                 :sha "949b83098225835b0eb58152372591f60084288a"}
+  amazonica {:mvn/version "0.3.111" :scope "provided"}}
+
+ :aliases
+ {:test {:main-opts ["-m" "cognitect.test-runner"]
+         :extra-paths ["test"]
+         :extra-deps
+         {expectations {:mvn/version "2.2.0-rc3"}
+          com.cognitect/test-runner {:git/url "https://github.com/cognitect-labs/test-runner.git"
+                                     :sha "5fb4fc46ad0bf2e0ce45eba5b9117a2e89166479"}}}}}
